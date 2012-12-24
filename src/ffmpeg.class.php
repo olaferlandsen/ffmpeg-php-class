@@ -3,12 +3,25 @@
 * FFmpeg PHP Class
 * 
 * @package		FFmpeg
-* @version		0.0.1
+* @version		0.0.2
 * @license		http://opensource.org/licenses/gpl-license.php  GNU Public License
 * @author		Olaf Erlandsen <olaftriskel@gmail.com>
 */
 class FFmpeg
 {
+	/**
+	*	
+	*/
+	private $STD = ' /dev/null 2<&1';
+	/**
+	*	
+	*/
+	private $quickMethods = array(
+		'sameq'
+	);
+	/**
+	*	
+	*/
 	private $as		=	array(
 		'b'			=>	'bitrate',
 		'r'			=>	'frameRate',
@@ -19,22 +32,89 @@ class FFmpeg
 		'ar'		=>	'audioSamplingFrequency',
 		'acodec'	=>	'audioCodec',
 		'vcodec'	=>	'videoCodec',
-		'rotate'	=>	'transpose',
+		'std'		=>	'redirectOutput',
+		'unset'		=>	'_unset',
 	);
+	/**
+	*	
+	*/
+	private $FFmpegOptionsAS = array(
+		'position'			=>	'ss',
+		'duration'			=>	't',
+		'filename'			=>	'i',
+		'offset'			=>	'itsoffset',
+		'time'				=>	'timestamp',
+	);
+	/**
+	*	
+	*/
 	private $ffmpeg		=	'ffmpeg';
+	/**
+	*	
+	*/
 	private $options	=	array(
 		'y'	=>	null,
 	);
+	/**
+	*	
+	*/
+	private $fixForceFormat = array(
+		'ogv' => 'ogg'
+	);
+	public $command;
+	/**
+	*	
+	*/
 	public function __call( $method , $args )
 	{
 		if( array_key_exists( $method , $this->as ) )
 		{
-			return call_user_func_array( array( $this , $this->as[$method] ) , $args );
+			return call_user_func_array( array( $this , $this->as[$method] ) ,
+				( is_array( $args ) ) ? $args : array( $args )
+			);
+		}
+		else if( in_array( $method , $this->quickMethods ) )
+		{
+			return call_user_func_array( array( $this , 'set' )  ,
+				( is_array( $args ) ) ? $args : array( $args )
+			);
+		}else{
+			throw new Exception( 'method doesnt exist' );
 		}
 	}
-	public function __construct( $ffmpeg = null )
+	public function call( $method , $args = array() )
+	{
+		if( method_exists( $this , $method ) )
+		{
+			return call_user_func_array( array( $this , $method )  , 
+				( is_array( $args ) ) ? $args : array( $args )
+			);
+		}else{
+			throw new Exception( 'method doesnt exist' );
+		}
+		return $this;
+	}
+	/**
+	*	
+	*/
+	public function __construct( $ffmpeg = null ,$input = false )
 	{
 		$this->ffmpeg( $ffmpeg );
+		if( !empty( $input ) )
+		{
+			$this->input( $input );
+		}
+		return $this;
+	}
+	/**
+	* @param	string	$std
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function redirectOutput( $std )
+	{
+		$this->STD = ' '.$std;
+		return $this;
 	}
 	/**
 	* @param	string	$output			Output file path
@@ -53,14 +133,31 @@ class FFmpeg
 				$items = array();
 				foreach( $values AS $item => $val )
 				{
-					$items[] = $item."=".$val;
+					if( !is_null( $val ) )
+					{
+						if( is_array( $val ) )
+						{
+							print_r( $val );
+							$val = join( ',' , $val );
+						}
+						$val = strval( $val );
+						
+						if( is_numeric( $item ) AND is_integer( $item ) )
+						{
+							$items[] = $val;
+						}else{
+							$items[] = $item."=". $val;
+						}
+					}else{
+						$items[] = $item;
+					}
 				}
-				$options [] = "-".$option." ".join(' ',$items);
+				$options [] = "-".$option." ".join(',',$items);
 			}else{
-				$options [] = "-".$option." ".$values;
+				$options [] = "-".$option." ".strval($values);
 			}
 		}
-		$this->command = $this->ffmpeg." ".join(' ',$options)." ".$output;
+		$this->command = $this->ffmpeg." ".join(' ',$options)." ".$output . $this->STD;
 		return $this;
 	}
 	/**
@@ -72,7 +169,12 @@ class FFmpeg
 	{
 		if( !empty( $forceFormat ) )
 		{
-			$this->options['f'] = $forceFormat;
+			$forceFormat = strtolower( $forceFormat );
+			if( array_key_exists( $forceFormat , $this->fixForceFormat ) )
+			{
+				$forceFormat = $this->fixForceFormat[ $forceFormat ];
+			}
+			$this->set('f',$forceFormat,false);
 		}
 		return $this;
 	}
@@ -85,10 +187,7 @@ class FFmpeg
 	{
 		if( file_exists( $file ) and is_file( $file ) )
 		{
-			if( is_readable( $file ) )
-			{
-				$this->options['i'] = $file;
-			}
+			$this->set('i',$file,false);
 		}
 		return $this;
 	}
@@ -99,11 +198,50 @@ class FFmpeg
 	*/
 	public function transpose( $transpose = 0 )
 	{
-		if( !empty( $transpose ) AND is_numeric( $transpose ) AND intval( $transpose ) > 0 )
+		if( is_numeric( $transpose )  )
 		{
-			$this->options['vf']['transpose'] = $transpose;
+			$this->options['vf']['transpose'] = strval($transpose);
 		}
 		return $this;
+	}
+	/**
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function vflip()
+	{
+		$this->options['vf']['vflip'] = null;
+		Return $this;
+	}
+	/**
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function hflip()
+	{
+		$this->options['vf']['hflip'] = null;
+		Return $this;
+	}
+	/**
+	* @return	object	Return self
+	* @param	$flip	v OR h
+	* @access	public
+	*/
+	public function flip( $flip )
+	{
+		if( !empty( $flip ) )
+		{
+			$flip = strtolower( $flip );
+			if( $flip == 'v' )
+			{
+				return $this->vflip();
+			}
+			else if( $flip == 'h' )
+			{
+				$this->hflip();
+			}
+		}
+		return false;
 	}
 	/**
 	* @param	string	$aspect	sample aspect ratio
@@ -112,8 +250,7 @@ class FFmpeg
 	*/
 	public function aspect( $aspect )
 	{
-		$this->options[ 'aspect' ] = $aspect;
-		return $this;
+		$this->set('aspect',$aspect,false);
 	}
 	/**
 	* @param	string	$b	set bitrate (in bits/s)
@@ -122,8 +259,7 @@ class FFmpeg
 	*/
 	public function bitrate( $b )
 	{
-		$this->options[ 'b' ] = $b;
-		return $this;
+		return $this->set('b',$b,false);
 	}
 	/**
 	* @param	string	$r	Set frame rate (Hz value, fraction or abbreviation).
@@ -132,9 +268,9 @@ class FFmpeg
 	*/
 	public function frameRate( $r )
 	{
-		if( preg_match( '/^([0-9]+\/[0-9]+)$/' , $r ) XOR is_numeric( $r ) )
+		if( !empty( $r ) AND preg_match( '/^([0-9]+\/[0-9]+)$/' , $r ) XOR is_numeric( $r ) )
 		{
-			$this->options['r'] = $r;
+			$this->set('r',$r,false);
 		}
 		return $this;
 	}
@@ -145,9 +281,9 @@ class FFmpeg
 	*/
 	public function size( $s )
 	{
-		if( preg_match( '/^([0-9]+x[0-9]+)$/' , $s ) )
+		if( !empty( $s ) AND preg_match( '/^([0-9]+x[0-9]+)$/' , $s ) )
 		{
-			$this->options['s'] = $s;
+			$this->set('s',$s,false);
 		}
 		return $this;
 	}
@@ -160,8 +296,7 @@ class FFmpeg
 	*/
 	public function position( $ss )
 	{
-		$this->options['ss'] = $ss ;
-		return $this;
+		return $this->set('ss',$ss,false);
 	}
 	/**
 	* @param	string	$t	Stop writing the output after its duration reaches duration. duration may be a number in seconds, or in hh:mm:ss[.xxx] form.
@@ -170,8 +305,7 @@ class FFmpeg
 	*/
 	public function duration( $t )
 	{
-		$this->options['t'] = $t ;
-		return $this;
+		return $this->set('t',$t,false);
 	}
 	/**
 	* Set the input time offset in seconds. [-]hh:mm:ss[.xxx] syntax is also supported. The offset is added to the timestamps of the input files.
@@ -182,87 +316,77 @@ class FFmpeg
 	*/
 	public function itsoffset( $itsoffset )
 	{
-		$this->options['itsoffset'] = $itsoffset ;
-		return $this;
+		return $this->set('itsoffset',$itsoffset,false);
 	}
 	/**
 	*	
 	*/
 	public function audioSamplingFrequency( $ar )
 	{
-		$this->options['ar'] = $ar;
-		return $this;
+		return $this->set('ar',$ar,false);
 	}
 	/**
 	*	
 	*/
 	public function audioBitrate( $ab )
 	{
-		$this->options['ab'] = $ab;
-		return $this;
+		return $this->set('ab', $ab , false );
 	}
 	/**
 	*	
 	*/
 	public function audioCodec( $acodec = 'copy' )
 	{
-		$this->options['acodec'] = $acodec;
-		return $this;
+		return $this->set('acodec',$acodec,false);
 	}
 	/**
 	*	
 	*/
 	public function audioChannels( $ac )
 	{
-		$this->options['ac'] = $ac;
-		return $this;
+		$this->set('ac',$ac,false);
 	}
 	/**
 	*	
 	*/
 	public function audioQuality( $aq )
 	{
-		$this->options['aq'] = $a;
-		return $this;
+		return $this->set('aq', $a , false );
 	}
 	/**
 	*	
 	*/
 	public function audioDisable()
 	{
-		$this->options['an'] = null;
-		return $this;
+		return $this->set('an',null,false);
 	}
 	/**
 	*	
 	*/
 	public function videoCodec( $vcodec = 'copy' )
 	{
-		$this->options['vcodec'] = $vcodec;
+		return $this->set('vcodec' , $vcodec );
 	}
 	/**
 	*	
 	*/
 	public function videoDisable()
 	{
-		$this->options['vn'] = null;
-		return $this;
+		return $this->set('vn',null,false);
 	}
 	/**
 	*	
 	*/
 	public function overwrite()
 	{
-		$this->options['y'] = null;
-		return $this;
+		return $this->set('y',null,false);
 	}
 	/**
 	*	
 	*/
 	public function fileSizeLimit( $fs )
 	{
-		$this->options['fs'] = $fs;
-		return $this;
+		return $this->set('fs' , $fs , false );
 	}
 	/**
 	*	
@@ -288,14 +412,18 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	*	
+	* @return	object	Return self
+	* @param	string	$append
+	* @access	public
 	*/
-	public function ready(  )
+	public function ready( $append = null )
 	{
-		return exec( $this->command );
+		return exec( $this->command . $append );
 	}
 	/**
-	*	
+	* @return	object	Return self
+	* @param	string	ffmpeg
+	* @access	public
 	*/
 	public function ffmpeg( $ffmpeg )
 	{
@@ -307,16 +435,49 @@ class FFmpeg
 	/**
 	*	
 	*/
-	public function set( $key , $value )
+	public function set( $key , $value = null , $append = false )
 	{
+		$key = preg_replace( '/^(\-+)/' , '' , $key );
 		if( !empty( $key ) )
 		{
-			if( is_array( $value ) OR !empty( $value ) or is_numeric( $value ) or is_null( $value ) )
+			if( array_key_exists( $key , $this->FFmpegOptionsAS ) )
+			{
+				$key = $this->FFmpegOptionsAS[ $key ];
+			}
+			if( $append === false )
 			{
 				$this->options[ $key ] = $value;
+			}else{
+				if( !array_key_exists( $key , $this->options )  )
+				{
+					$this->options[ $key ] = array($value);
+				}else if( !is_array( $this->options[ $key ] ) )
+				{	
+					$this->options[ $key ] = array($this->options[ $key ],$value);
+				}else{
+					$this->options[ $key ][] = $value;
+				}
 			}
 		}
 		return $this;
+	}
+	/**
+	*	
+	*/
+	public function _unset( $key )
+	{
+		if( array_key_exists( $key , $this->options ) )
+		{
+			unset( $this->options[ $key ] ) ;
+		}
+		return $this;
+	}
+	/**
+	*	
+	*/
+	public function grayScale( )
+	{
+		return $this->set('pix_fmt','gray');
 	}
 }
 ?>

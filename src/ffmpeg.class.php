@@ -3,7 +3,7 @@
 * FFmpeg PHP Class
 * 
 * @package		FFmpeg
-* @version		0.0.2
+* @version		0.0.5
 * @license		http://opensource.org/licenses/gpl-license.php  GNU Public License
 * @author		Olaf Erlandsen <olaftriskel@gmail.com>
 */
@@ -12,7 +12,7 @@ class FFmpeg
 	/**
 	*	
 	*/
-	private $STD = ' /dev/null 2<&1';
+	private $STD = ' 2<&1';
 	/**
 	*	
 	*/
@@ -34,6 +34,9 @@ class FFmpeg
 		'vcodec'	=>	'videoCodec',
 		'std'		=>	'redirectOutput',
 		'unset'		=>	'_unset',
+		'number'	=>	'videoFrames',
+		'vframes'	=>	'videoFrames',
+		'y'			=>	'overwrite',
 	);
 	/**
 	*	
@@ -44,6 +47,7 @@ class FFmpeg
 		'filename'			=>	'i',
 		'offset'			=>	'itsoffset',
 		'time'				=>	'timestamp',
+		'number'			=>	'vframes',
 	);
 	/**
 	*	
@@ -59,7 +63,9 @@ class FFmpeg
 	*	
 	*/
 	private $fixForceFormat = array(
-		'ogv' => 'ogg'
+		'ogv'	=>	'ogg',
+		'jpeg'	=>	'mjpeg',
+		'jpg'	=>	'mjpeg',
 	);
 	public $command;
 	/**
@@ -69,17 +75,13 @@ class FFmpeg
 	{
 		if( array_key_exists( $method , $this->as ) )
 		{
-			return call_user_func_array( array( $this , $this->as[$method] ) ,
-				( is_array( $args ) ) ? $args : array( $args )
-			);
+			return call_user_func_array( array( $this , $this->as[$method] ),( is_array( $args ) ) ? $args : array( $args ));
 		}
 		else if( in_array( $method , $this->quickMethods ) )
 		{
-			return call_user_func_array( array( $this , 'set' )  ,
-				( is_array( $args ) ) ? $args : array( $args )
-			);
+			return call_user_func_array( array($this,'set'),( is_array( $args ) ) ? $args : array( $args ));
 		}else{
-			throw new Exception( 'method doesnt exist' );
+			throw new Exception( 'method '. $method .' doesnt exist' );
 		}
 	}
 	public function call( $method , $args = array() )
@@ -113,7 +115,10 @@ class FFmpeg
 	*/
 	public function redirectOutput( $std )
 	{
-		$this->STD = ' '.$std;
+		if( !empty($std) )
+		{
+			$this->STD = ' '.$std;
+		}
 		return $this;
 	}
 	/**
@@ -188,7 +193,44 @@ class FFmpeg
 		if( file_exists( $file ) and is_file( $file ) )
 		{
 			$this->set('i',$file,false);
+		}else{
+			trigger_error ( "File ". $file ." doesn't exist" , E_USER_ERROR  );
 		}
+		return $this;
+	}
+	/**
+	* @param	string	$size
+	* @param	string	$start
+	* @param	string	$videoFrames
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function thumb( $size , $start , $videoFrames = 1 )
+	{
+		$input = false;
+		if( !is_numeric( $videoFrames ) OR $videoFrames <= 0)
+		{
+			$videoFrames = 1;
+		}
+		if( array_key_exists( 'i' , $this->options ) )
+		{
+			$input = $this->options['i'];
+		}
+		$this->clear();
+		if( $input )
+		{
+			$this->input( $input );
+		}
+		$this->audioDisable()->size( $size )->videoFrames( $videoFrames )->frameRate( 1 );
+		return $this;
+	}
+	/**
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function clear()
+	{
+		$this->options = array();
 		return $this;
 	}
 	/**
@@ -361,43 +403,55 @@ class FFmpeg
 		return $this->set('an',null,false);
 	}
 	/**
-	*	
+	* @param	string	$number
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function videoFrames( $number )
+	{
+		return $this->set( 'vframes' , $number );
+	}
+	/**
+	*	@param string	$vcodec
+	*	@return object Self
 	*/
 	public function videoCodec( $vcodec = 'copy' )
 	{
 		return $this->set('vcodec' , $vcodec );
 	}
 	/**
-	*	
+	*	@return object Self
 	*/
 	public function videoDisable()
 	{
 		return $this->set('vn',null,false);
 	}
 	/**
-	*	
+	*	@return object Self
 	*/
 	public function overwrite()
 	{
 		return $this->set('y',null,false);
 	}
 	/**
-	*	
+	*	@param string	$fs
+	*	@return object Self
 	*/
 	public function fileSizeLimit( $fs )
 	{
 		return $this->set('fs' , $fs , false );
 	}
 	/**
-	*	
+	*	@param string	$progress
+	*	@return object Self
 	*/
 	public function progress( $progress )
 	{
-		$this->options['progress'] = $progress;
-		return $this;
+		return $this->set('progress',$progress);
 	}
 	/**
-	*	
+	*	@param integer	$pass
+	*	@return object Self
 	*/
 	public function pass( $pass )
 	{
@@ -433,7 +487,10 @@ class FFmpeg
 		}
 	}
 	/**
-	*	
+	*	@param string	$key
+	*	@param string	$value
+	*	@param boolen	$append
+	*	@return object Self
 	*/
 	public function set( $key , $value = null , $append = false )
 	{
@@ -462,7 +519,8 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	*	
+	*	@param string	$key
+	*	@return object Self
 	*/
 	public function _unset( $key )
 	{
@@ -473,7 +531,7 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	*	
+	*	@return object Self
 	*/
 	public function grayScale( )
 	{

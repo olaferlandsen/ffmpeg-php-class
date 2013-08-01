@@ -1,5 +1,8 @@
-FFmpeg Class
-------------
+# FFmpeg Class
+A complete class for using FFmpeg written in PHP 5.
+
+## Author
+
 Author	:	Olaf Erlandsen
 
 Contact	:	olaftriskel@gmail.com <Olaf Erlandsen>
@@ -10,11 +13,20 @@ Version	:	0.0.6
 
 Date	:	08.01.2013( mm.dd.yyyy )
 
-license	:	http://opensource.org/licenses/gpl-license.php
+License	:	http://opensource.org/licenses/gpl-license.php
 
+Web Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/
+
+## Requirements
+
+* FFmpeg 0.5.12+
+* PHP5.3+
+    * PCRE( Perl-Compatible )
+
+## Examples
 
 Example #1: Input & output.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -23,7 +35,7 @@ Example #1: Input & output.
 ```
 
 Example #2: Simple frame rate.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -32,7 +44,7 @@ Example #2: Simple frame rate.
 ```
 
 Example #3: Simple frame rate using method alias.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -41,7 +53,7 @@ Example #3: Simple frame rate using method alias.
 ```
 
 Example #4: Rotate video.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -50,7 +62,7 @@ Example #4: Rotate video.
 ```
 
 Example #5: Rotate video with alias "rotate".
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -59,7 +71,7 @@ Example #5: Rotate video with alias "rotate".
 ```
 
 Example #6: Force format.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -68,7 +80,7 @@ Example #6: Force format.
 ```
 
 Example #7: Force format quickly.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -77,7 +89,7 @@ Example #7: Force format quickly.
 ```
 
 Example #8: Get command
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -87,7 +99,7 @@ Example #8: Get command
 
 
 Example #9: Run command.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -97,7 +109,7 @@ Example #9: Run command.
 
 
 Example #10: Gray Scale.
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -106,7 +118,7 @@ Example #10: Gray Scale.
 ```
 
 Example #11: Set param.
-------------
+
 ```php
     <?php
     	$key = 'acodec';
@@ -117,7 +129,7 @@ Example #11: Set param.
 ```
 
 Example #12: Unset param.
-------------
+
 ```php
     <?php
     	$key = 'acodec';
@@ -127,7 +139,7 @@ Example #12: Unset param.
 ```
 
 Example #13: Quick methods
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -136,7 +148,7 @@ Example #13: Quick methods
 ```
 
 Example #13: Flip ( V or H )
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -145,7 +157,7 @@ Example #13: Flip ( V or H )
 ```
 
 Example #13: hflip
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -154,7 +166,7 @@ Example #13: hflip
 ```
 
 Example #14: vflip
-------------
+
 ```php
     <?php
     	$FFmpeg = new FFmpeg;
@@ -164,7 +176,7 @@ Example #14: vflip
 
 
 Example #15: Complete
-------------
+
 ```php
     <?php
 	/**
@@ -201,7 +213,7 @@ Example #15: Complete
 ```
 
 Example #16: Clear
-------------
+
 ```php
 	<?php
 	$FFmpeg = new FFmpeg('/bin/ffmpeg','/var/media/original.mp4')->vflip()->output( '/var/media/new.3gp' )->clear()->input( '/var/www/file.3gp' );
@@ -209,7 +221,7 @@ Example #16: Clear
 ```
 
 Example #17: Thumbs
-------------
+
 ```php
 	<?php
 	$size = '100x100';
@@ -222,7 +234,7 @@ Example #17: Thumbs
 ```
 
 Example #18: Image to video
-------------
+
 ```php
 	<?php
 	$FFmpeg = new FFmpeg;

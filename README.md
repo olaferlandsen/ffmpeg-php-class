@@ -198,7 +198,6 @@ Example #15: Complete
 /usr/local/bin/ffmpeg -y -vf transpose=0,vflip -pix_fmt gray -vcodec h264 -r 30000/1001 -acodec aac -ab 192k -t 99 -ss 0 -itsoffset 2 -f mp4 /var/media/new.mp4 /dev/null 2<&1
 ```
 
-
 Example #16: Clear
 ------------
 ```php
@@ -219,3 +218,16 @@ Example #17: Thumbs
 	$FFmpeg->input( '/var/www/video.mp4' )->thumb( $size , $start, $frames )->ready();
 	?>
 ```
+
+Example #18: Image to video
+------------
+```php
+	<?php
+	$FFmpeg = new FFmpeg;
+	$FFmpeg->input( '/var/www/images/pref%04d.png' )->frameRate( '29,97' )->size( '1920x1080' )->force('image2');
+	$FFmpeg->output( 'image2video.mp4' );
+	$FFmpeg->ready();
+	?>
+```
+
+

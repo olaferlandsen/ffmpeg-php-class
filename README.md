@@ -2,11 +2,13 @@ FFmpeg Class
 ------------
 Author	:	Olaf Erlandsen
 
-Contact	:	olaftriskel@gmail.com
+Contact	:	olaftriskel@gmail.com <Olaf Erlandsen>
+
+Skype	:	olaferlandsen
 
 Version	:	0.0.6
 
-Date	:	12.31.2012
+Date	:	08.01.2013( mm.dd.yyyy )
 
 license	:	http://opensource.org/licenses/gpl-license.php
 

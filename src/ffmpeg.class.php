@@ -193,6 +193,9 @@ class FFmpeg
 		if( file_exists( $file ) and is_file( $file ) )
 		{
 			$this->set('i',$file,false);
+		}else if( strstr( $file , '%' ) !== false )
+		{
+			$this->set('i',$file,false);
 		}else{
 			trigger_error ( "File ". $file ." doesn't exist" , E_USER_ERROR  );
 		}

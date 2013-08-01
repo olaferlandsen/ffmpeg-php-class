@@ -4,7 +4,7 @@ Author	:	Olaf Erlandsen
 
 Contact	:	olaftriskel@gmail.com
 
-Version	:	0.0.5
+Version	:	0.0.6
 
 Date	:	12.31.2012
 

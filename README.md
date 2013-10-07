@@ -1,5 +1,5 @@
 # FFmpeg Class
-A complete class for using FFmpeg written in PHP 5.
+A complete class for using FFmpeg written in PHP 5.3+
 
 ## Author
 
@@ -9,18 +9,19 @@ Contact	:	olaftriskel@gmail.com <Olaf Erlandsen>
 
 Skype	:	olaferlandsen
 
-Version	:	0.0.6
+Version	:	1.0
 
-Date	:	08.01.2013( mm.dd.yyyy )
+Date	:	10.07.2013( mm.dd.yyyy )
 
 License	:	http://opensource.org/licenses/gpl-license.php
 
 Web Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/
 
+
 ## Requirements
 
 * FFmpeg 0.5.12+
-* PHP5.3+
+* PHP 5.3+
     * PCRE( Perl-Compatible )
 
 ## Examples
@@ -245,3 +246,7 @@ Example #18: Image to video
 ```
 
 
+===
+Got more ideas? write us.
+===
+Need support? Write us, it's free!

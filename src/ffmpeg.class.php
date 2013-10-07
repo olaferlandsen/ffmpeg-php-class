@@ -3,7 +3,7 @@
 * FFmpeg PHP Class
 * 
 * @package		FFmpeg
-* @version		0.0.8
+* @version		0.1.0
 * @license		http://opensource.org/licenses/gpl-license.php  GNU Public License
 * @author		Olaf Erlandsen <olaftriskel@gmail.com>
 */
@@ -475,7 +475,20 @@ class FFmpeg
 	*/
 	public function ready( $append = null )
 	{
-		return exec( $this->command . $append );
+		/**
+		*	Check if command is empty
+		*/
+		if( empty( $this->command ) )
+		{
+			$this->output();
+		}
+		if(empty( $this->command ))
+		{
+			trigger_error("Cannot execute a blank command",E_USER_ERROR);
+			return false;
+		}else{
+			return exec( $this->command . $append );
+		}
 	}
 	/**
 	* @return	object	Return self

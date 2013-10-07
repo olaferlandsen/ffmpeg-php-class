@@ -246,7 +246,11 @@ Example #18: Image to video
 ```
 
 
-===
-Got more ideas? write us.
-===
+## Got more ideas? write us.
+
 Need support? Write us, it's free!
+
+## Want to donate or just give me a coffee?
+
+* Use my Paypal account: olaftriskel@gmail.com
+* [Donate a cofee via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6326C75DYREVQ)

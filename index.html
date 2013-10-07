@@ -33,14 +33,14 @@
         <h1>
 <a name="ffmpeg-class" class="anchor" href="#ffmpeg-class"><span class="octicon octicon-link"></span></a>FFmpeg Class</h1>
 
-<p>A complete class for using FFmpeg written in PHP 5.</p>
+<p>A complete class for using FFmpeg written in PHP 5.3+</p>
 
 <h2>
 <a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>FFmpeg 0.5.12+</li>
-<li>PHP5.3+
+<li>PHP 5.3+
 
 <ul>
 <li>PCRE( Perl-Compatible )</li>
@@ -49,100 +49,89 @@
 </ul><h2>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
 
-<h2>
-<a name="example-1-input--output" class="anchor" href="#example-1-input--output"><span class="octicon octicon-link"></span></a>Example #1: Input &amp; output.</h2>
+<p>Example #1: Input &amp; output.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-2-simple-frame-rate" class="anchor" href="#example-2-simple-frame-rate"><span class="octicon octicon-link"></span></a>Example #2: Simple frame rate.</h2>
+<p>Example #2: Simple frame rate.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">frameRate</span><span class="p">(</span> <span class="s1">'30000/1001'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-3-simple-frame-rate-using-method-alias" class="anchor" href="#example-3-simple-frame-rate-using-method-alias"><span class="octicon octicon-link"></span></a>Example #3: Simple frame rate using method alias.</h2>
+<p>Example #3: Simple frame rate using method alias.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">i</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">r</span><span class="p">(</span> <span class="s1">'30000/1001'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-4-rotate-video" class="anchor" href="#example-4-rotate-video"><span class="octicon octicon-link"></span></a>Example #4: Rotate video.</h2>
+<p>Example #4: Rotate video.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">transpose</span><span class="p">(</span> <span class="mi">2</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-5-rotate-video-with-alias-rotate" class="anchor" href="#example-5-rotate-video-with-alias-rotate"><span class="octicon octicon-link"></span></a>Example #5: Rotate video with alias "rotate".</h2>
+<p>Example #5: Rotate video with alias "rotate".</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">rotate</span><span class="p">(</span> <span class="mi">2</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-6-force-format" class="anchor" href="#example-6-force-format"><span class="octicon octicon-link"></span></a>Example #6: Force format.</h2>
+<p>Example #6: Force format.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">forceFormat</span><span class="p">(</span> <span class="s1">'3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-7-force-format-quickly" class="anchor" href="#example-7-force-format-quickly"><span class="octicon octicon-link"></span></a>Example #7: Force format quickly.</h2>
+<p>Example #7: Force format quickly.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">,</span> <span class="s1">'3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-8-get-command" class="anchor" href="#example-8-get-command"><span class="octicon octicon-link"></span></a>Example #8: Get command</h2>
+<p>Example #8: Get command</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">command</span><span class="p">;</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-9-run-command" class="anchor" href="#example-9-run-command"><span class="octicon octicon-link"></span></a>Example #9: Run command.</h2>
+<p>Example #9: Run command.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-10-gray-scale" class="anchor" href="#example-10-gray-scale"><span class="octicon octicon-link"></span></a>Example #10: Gray Scale.</h2>
+<p>Example #10: Gray Scale.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">grayScale</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-11-set-param" class="anchor" href="#example-11-set-param"><span class="octicon octicon-link"></span></a>Example #11: Set param.</h2>
+<p>Example #11: Set param.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$key</span> <span class="o">=</span> <span class="s1">'acodec'</span><span class="p">;</span>
         <span class="nv">$value</span> <span class="o">=</span> <span class="s1">'AAC'</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
@@ -150,56 +139,50 @@
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-12-unset-param" class="anchor" href="#example-12-unset-param"><span class="octicon octicon-link"></span></a>Example #12: Unset param.</h2>
+<p>Example #12: Unset param.</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$key</span> <span class="o">=</span> <span class="s1">'acodec'</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">unset</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-13-quick-methods" class="anchor" href="#example-13-quick-methods"><span class="octicon octicon-link"></span></a>Example #13: Quick methods</h2>
+<p>Example #13: Quick methods</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">sameq</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-13-flip--v-or-h-" class="anchor" href="#example-13-flip--v-or-h-"><span class="octicon octicon-link"></span></a>Example #13: Flip ( V or H )</h2>
+<p>Example #13: Flip ( V or H )</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">flip</span><span class="p">(</span> <span class="s1">'v'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-13-hflip" class="anchor" href="#example-13-hflip"><span class="octicon octicon-link"></span></a>Example #13: hflip</h2>
+<p>Example #13: hflip</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">hflip</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-14-vflip" class="anchor" href="#example-14-vflip"><span class="octicon octicon-link"></span></a>Example #14: vflip</h2>
+<p>Example #14: vflip</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
         <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/media/original.mp4'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">vflip</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">ready</span><span class="p">();</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-15-complete" class="anchor" href="#example-15-complete"><span class="octicon octicon-link"></span></a>Example #15: Complete</h2>
+<p>Example #15: Complete</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
     <span class="sd">/**</span>
 <span class="sd">    *   include FFmpeg class</span>
 <span class="sd">    **/</span>
@@ -229,21 +212,19 @@
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<div class="highlight"><pre>/usr/local/bin/ffmpeg -y -vf <span class="nv">transpose</span><span class="o">=</span>0,vflip -pix_fmt gray -vcodec h264 -r 30000/1001 -acodec aac -ab 192k -t 99 -ss 0 -itsoffset 2 -f mp4 /var/media/new.mp4 /dev/null 2&lt;&amp;1
+<div class="highlight highlight-bash"><pre>/usr/local/bin/ffmpeg -y -vf <span class="nv">transpose</span><span class="o">=</span>0,vflip -pix_fmt gray -vcodec h264 -r 30000/1001 -acodec aac -ab 192k -t 99 -ss 0 -itsoffset 2 -f mp4 /var/media/new.mp4 /dev/null 2&lt;&amp;1
 </pre></div>
 
-<h2>
-<a name="example-16-clear" class="anchor" href="#example-16-clear"><span class="octicon octicon-link"></span></a>Example #16: Clear</h2>
+<p>Example #16: Clear</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
     <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">(</span><span class="s1">'/bin/ffmpeg'</span><span class="p">,</span><span class="s1">'/var/media/original.mp4'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">vflip</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'/var/media/new.3gp'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/www/file.3gp'</span> <span class="p">);</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-17-thumbs" class="anchor" href="#example-17-thumbs"><span class="octicon octicon-link"></span></a>Example #17: Thumbs</h2>
+<p>Example #17: Thumbs</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
     <span class="nv">$size</span> <span class="o">=</span> <span class="s1">'100x100'</span><span class="p">;</span>
     <span class="nv">$start</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="nv">$frames</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
@@ -253,10 +234,9 @@
     <span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 
-<h2>
-<a name="example-18-image-to-video" class="anchor" href="#example-18-image-to-video"><span class="octicon octicon-link"></span></a>Example #18: Image to video</h2>
+<p>Example #18: Image to video</p>
 
-<div class="highlight"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
+<div class="highlight highlight-php"><pre>    <span class="o">&lt;?</span><span class="nx">php</span>
     <span class="nv">$FFmpeg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FFmpeg</span><span class="p">;</span>
     <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span> <span class="s1">'/var/www/images/pref%04d.png'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">frameRate</span><span class="p">(</span> <span class="s1">'29,97'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">size</span><span class="p">(</span> <span class="s1">'1920x1080'</span> <span class="p">)</span><span class="o">-&gt;</span><span class="na">force</span><span class="p">(</span><span class="s1">'image2'</span><span class="p">);</span>
     <span class="nv">$FFmpeg</span><span class="o">-&gt;</span><span class="na">output</span><span class="p">(</span> <span class="s1">'image2video.mp4'</span> <span class="p">);</span>
@@ -275,7 +255,10 @@
 <li>Date          :   08.01.2013( mm.dd.yyyy )</li>
 <li>License   :   <a href="http://opensource.org/licenses/gpl-license.php">http://opensource.org/licenses/gpl-license.php</a>
 </li>
-</ul>
+</ul><h2>
+<a name="got-more-ideas-write-us" class="anchor" href="#got-more-ideas-write-us"><span class="octicon octicon-link"></span></a>Got more ideas? write us.</h2>
+
+<p>Need support? Write us, it's free!</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>

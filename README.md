@@ -26,7 +26,7 @@ Web Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/
 
 ## Examples
 
-Example #1: Input & output.
+### Example #1: Input & output.
 
 ```php
     <?php
@@ -35,7 +35,7 @@ Example #1: Input & output.
     ?>
 ```
 
-Example #2: Simple frame rate.
+### Example #2: Simple frame rate.
 
 ```php
     <?php
@@ -44,7 +44,7 @@ Example #2: Simple frame rate.
     ?>
 ```
 
-Example #3: Simple frame rate using method alias.
+### Example #3: Simple frame rate using method alias.
 
 ```php
     <?php
@@ -53,7 +53,7 @@ Example #3: Simple frame rate using method alias.
     ?>
 ```
 
-Example #4: Rotate video.
+### Example #4: Rotate video.
 
 ```php
     <?php
@@ -62,7 +62,7 @@ Example #4: Rotate video.
     ?>
 ```
 
-Example #5: Rotate video with alias "rotate".
+### Example #5: Rotate video with alias "rotate".
 
 ```php
     <?php
@@ -71,7 +71,7 @@ Example #5: Rotate video with alias "rotate".
     ?>
 ```
 
-Example #6: Force format.
+### Example #6: Force format.
 
 ```php
     <?php
@@ -80,7 +80,7 @@ Example #6: Force format.
     ?>
 ```
 
-Example #7: Force format quickly.
+### Example #7: Force format quickly.
 
 ```php
     <?php
@@ -89,7 +89,7 @@ Example #7: Force format quickly.
     ?>
 ```
 
-Example #8: Get command
+### Example #8: Get command
 
 ```php
     <?php
@@ -99,7 +99,7 @@ Example #8: Get command
 ```
 
 
-Example #9: Run command.
+### Example #9: Run command.
 
 ```php
     <?php
@@ -109,7 +109,7 @@ Example #9: Run command.
 ```
 
 
-Example #10: Gray Scale.
+### Example #10: Gray Scale.
 
 ```php
     <?php
@@ -118,7 +118,7 @@ Example #10: Gray Scale.
     ?>
 ```
 
-Example #11: Set param.
+### Example #11: Set param.
 
 ```php
     <?php
@@ -129,7 +129,7 @@ Example #11: Set param.
     ?>
 ```
 
-Example #12: Unset param.
+### Example #12: Unset param.
 
 ```php
     <?php
@@ -139,7 +139,7 @@ Example #12: Unset param.
     ?>
 ```
 
-Example #13: Quick methods
+### Example #13: Quick methods
 
 ```php
     <?php
@@ -148,7 +148,7 @@ Example #13: Quick methods
     ?>
 ```
 
-Example #13: Flip ( V or H )
+### Example #13: Flip ( V or H )
 
 ```php
     <?php
@@ -157,7 +157,7 @@ Example #13: Flip ( V or H )
     ?>
 ```
 
-Example #13: hflip
+### Example #13: hflip
 
 ```php
     <?php
@@ -166,7 +166,7 @@ Example #13: hflip
     ?>
 ```
 
-Example #14: vflip
+### Example #14: vflip
 
 ```php
     <?php
@@ -176,7 +176,7 @@ Example #14: vflip
 ```
 
 
-Example #15: Complete
+### Example #15: Complete
 
 ```php
     <?php
@@ -213,7 +213,7 @@ Example #15: Complete
 /usr/local/bin/ffmpeg -y -vf transpose=0,vflip -pix_fmt gray -vcodec h264 -r 30000/1001 -acodec aac -ab 192k -t 99 -ss 0 -itsoffset 2 -f mp4 /var/media/new.mp4 /dev/null 2<&1
 ```
 
-Example #16: Clear
+### Example #16: Clear
 
 ```php
 	<?php
@@ -221,7 +221,7 @@ Example #16: Clear
 	?>
 ```
 
-Example #17: Thumbs
+### Example #17: Thumbs
 
 ```php
 	<?php
@@ -234,7 +234,7 @@ Example #17: Thumbs
 	?>
 ```
 
-Example #18: Image to video
+### Example #18: Image to video
 
 ```php
 	<?php
@@ -254,3 +254,9 @@ Need support? Write us, it's free!
 
 * Use my Paypal account: olaftriskel@gmail.com
 * [Donate a cofee via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6326C75DYREVQ)
+
+## Remember:
+* This is an open source project and free.
+* Share our repository.
+* If possible, write a letter of recommendation.
+* The support is free! Please contact us if you have questions or a problem.

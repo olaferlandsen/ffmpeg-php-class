@@ -1,22 +1,5 @@
 # FFmpeg Class
-A complete class for using FFmpeg written in PHP 5.3+
-
-## Author
-
-Author	:	Olaf Erlandsen
-
-Contact	:	olaftriskel@gmail.com <Olaf Erlandsen>
-
-Skype	:	olaferlandsen
-
-Version	:	1.0
-
-Date	:	10.07.2013( mm.dd.yyyy )
-
-License	:	http://opensource.org/licenses/gpl-license.php
-
-Web Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/
-
+A complete cross-platform class for using FFmpeg written in PHP 5.3+
 
 ## Requirements
 
@@ -245,18 +228,58 @@ Web Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/
 	?>
 ```
 
+### Example #19: Set the FFmpeg binary file on Windows
+
+```php
+	<?php
+	$FFmpeg = new FFmpeg( "C:\ffmpeg\bin\ffmpeg.exe" );
+	$FFmpeg->input( 'C:\xampp\input.mp4' )->output( 'output.3gp' );
+	$FFmpeg->ready();
+	?>
+```
+
+### Example #20: Set the FFmpeg binary file on Linux & Unix
+
+```php
+	<?php
+	$FFmpeg = new FFmpeg( "/etc/bin/ffmpeg" );
+	$FFmpeg->input( '/var/www/input.mp4' )->output( 'output.3gp' );
+	$FFmpeg->ready();
+	?>
+```
+
+### Example #21: Log level
+
+```php
+	<?php
+	$FFmpeg = new FFmpeg;
+	$FFmpeg->input( '/var/www/input.mp4' )->loglevel("debug")->output( 'output.3gp' );
+	$FFmpeg->ready();
+	?>
+```
 
 ## Got more ideas? write us.
 
-Need support? Write us, it's free!
+Need support? Write us, it's free! olaftriskel@gmail.com
 
 ## Want to donate or just give me a coffee?
 
 * Use my Paypal account: olaftriskel@gmail.com
-* [Donate a cofee via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6326C75DYREVQ)
+* [Donate a cofee via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLJQ6GS4ZNLEG)
 
 ## Remember:
+
 * This is an open source project and free.
 * Share our repository.
 * If possible, write a letter of recommendation.
 * The support is free! Please contact us if you have questions or a problem.
+
+## Author
+
+* Author	:	Olaf Erlandsen
+* Contact	:	olaftriskel@gmail.com <Olaf Erlandsen>
+* Skype		:	olaferlandsen
+* Version	:	0.1.3
+* Date		:	11.18.2013( mm.dd.yyyy )
+* License	:	http://opensource.org/licenses/gpl-license.php
+* Home Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/

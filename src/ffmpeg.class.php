@@ -3,7 +3,7 @@
 * FFmpeg PHP Class
 * 
 * @package		FFmpeg
-* @version		0.1.0
+* @version		0.1.3
 * @license		http://opensource.org/licenses/gpl-license.php  GNU Public License
 * @author		Olaf Erlandsen <olaftriskel@gmail.com>
 */
@@ -27,9 +27,11 @@ class FFmpeg
 		'r'			=>	'frameRate',
 		'fs'		=>	'fileSizeLimit',
 		'f'			=>	'forceFormat',
+		'force'		=>	'forceFormat',
 		'i'			=>	'input',
 		's'			=>	'size',
 		'ar'		=>	'audioSamplingFrequency',
+		'ab'		=>	'audioBitrate',
 		'acodec'	=>	'audioCodec',
 		'vcodec'	=>	'videoCodec',
 		'std'		=>	'redirectOutput',
@@ -37,6 +39,7 @@ class FFmpeg
 		'number'	=>	'videoFrames',
 		'vframes'	=>	'videoFrames',
 		'y'			=>	'overwrite',
+		'log'		=>	'loglevel',
 	);
 	/**
 	*	
@@ -63,9 +66,10 @@ class FFmpeg
 	*	
 	*/
 	private $fixForceFormat = array(
-		'ogv'	=>	'ogg',
-		'jpeg'	=>	'mjpeg',
-		'jpg'	=>	'mjpeg',
+		"ogv"	=>	'ogg',
+		"jpeg"	=>	'mjpeg',
+		"jpg"	=>	'mjpeg',
+		"flash"	=>	"flv",
 	);
 	public $command;
 	/**
@@ -548,10 +552,27 @@ class FFmpeg
 	}
 	/**
 	*	@return object Self
+	*	@access	public
 	*/
 	public function grayScale( )
 	{
 		return $this->set('pix_fmt','gray');
+	}
+	
+	/**
+	* @param	string	$level
+	* @return	object	Return self
+	* @access	public
+	*/
+	public function loglevel( $level = "verbose" )
+	{
+		$level = strtolower( $level );
+		if( in_array( $level , array("quiet","panic","fatal","error","warning","info","verbose","debug") ) )
+		{
+			return $this->set('loglevel',$level );
+		}else{
+			trigger_error(  "The option does not valid in loglevel" );
+		}
 	}
 }
 ?>

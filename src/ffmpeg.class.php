@@ -260,7 +260,7 @@ class FFmpeg
 	public function vflip()
 	{
 		$this->options['vf']['vflip'] = null;
-		Return $this;
+		return $this;
 	}
 	/**
 	* @return	object	Return self
@@ -269,7 +269,7 @@ class FFmpeg
 	public function hflip()
 	{
 		$this->options['vf']['hflip'] = null;
-		Return $this;
+		return $this;
 	}
 	/**
 	* @return	object	Return self

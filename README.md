@@ -1,5 +1,9 @@
-# FFmpeg Class
+# FFmpeg Class ( Without `ffmpeg-php` )
 A complete cross-platform class for using FFmpeg written in PHP 5.3+
+
+> **IMPORTANT!**
+
+> This class don't depend of `ffmpeg-php` php extension.
 
 ## Requirements
 
@@ -131,7 +135,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
     ?>
 ```
 
-### Example #13: Flip ( V or H )
+### Example #14: Flip ( V or H )
 
 ```php
     <?php
@@ -140,7 +144,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
     ?>
 ```
 
-### Example #13: hflip
+### Example #15: hflip
 
 ```php
     <?php
@@ -149,7 +153,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
     ?>
 ```
 
-### Example #14: vflip
+### Example #16: vflip
 
 ```php
     <?php
@@ -159,7 +163,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 ```
 
 
-### Example #15: Complete
+### Example #17: Complete
 
 ```php
     <?php
@@ -196,7 +200,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 /usr/local/bin/ffmpeg -y -vf transpose=0,vflip -pix_fmt gray -vcodec h264 -r 30000/1001 -acodec aac -ab 192k -t 99 -ss 0 -itsoffset 2 -f mp4 /var/media/new.mp4 /dev/null 2<&1
 ```
 
-### Example #16: Clear
+### Example #18: Clear
 
 ```php
 	<?php
@@ -204,7 +208,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	?>
 ```
 
-### Example #17: Thumbs
+### Example #19: Thumbs
 
 ```php
 	<?php
@@ -217,7 +221,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	?>
 ```
 
-### Example #18: Image to video
+### Example #20: Image to video
 
 ```php
 	<?php
@@ -228,7 +232,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	?>
 ```
 
-### Example #19: Set the FFmpeg binary file on Windows
+### Example #21: Set the FFmpeg binary file on Windows
 
 ```php
 	<?php
@@ -238,7 +242,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	?>
 ```
 
-### Example #20: Set the FFmpeg binary file on Linux & Unix
+### Example #22: Set the FFmpeg binary file on Linux & Unix
 
 ```php
 	<?php
@@ -248,7 +252,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	?>
 ```
 
-### Example #21: Log level
+### Example #23: Log level
 
 ```php
 	<?php

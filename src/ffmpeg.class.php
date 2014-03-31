@@ -191,17 +191,18 @@ class FFmpeg
 	* @param	string	$file	input file path
 	* @return	object	Return self
 	* @access	public
+	* @version	1.2	Fix by @propertunist
 	*/
-	public function input( $file )
+	public function input ($file)
 	{
-		if( file_exists( $file ) and is_file( $file ) )
-		{
-			$this->set('i',$file,false);
-		}else if( strstr( $file , '%' ) !== false )
-		{
-			$this->set('i',$file,false);
-		}else{
-			trigger_error ( "File ". $file ." doesn't exist" , E_USER_ERROR  );
+		if (file_exists($file) AND is_file($file)) {
+			$this->set('i', '"'.$file.'"', false);
+		} else {
+			if (strstr($file, '%') !== false) {
+				$this->set('i', '"'.$file.'"', false);
+			} else {
+				trigger_error ("File $file doesn't exist", E_USER_ERROR);
+			}
 		}
 		return $this;
 	}
@@ -211,25 +212,20 @@ class FFmpeg
 	* @param	string	$videoFrames
 	* @return	object	Return self
 	* @access	public
+	* @version	1.2	Fix by @propertunist
 	*/
-	public function thumb( $size , $start , $videoFrames = 1 )
+	public function thumb ($size, $start, $videoFrames = 1)
 	{
-		$input = false;
-		if( !is_numeric( $videoFrames ) OR $videoFrames <= 0)
-		{
-			$videoFrames = 1;
-		}
-		if( array_key_exists( 'i' , $this->options ) )
-		{
-			$input = $this->options['i'];
-		}
-		$this->clear();
-		if( $input )
-		{
-			$this->input( $input );
-		}
-		$this->audioDisable()->size( $size )->videoFrames( $videoFrames )->frameRate( 1 );
-		return $this;
+		//$input = false;
+	        if (!is_numeric( $videoFrames ) OR $videoFrames <= 0) {
+	        	$videoFrames = 1;
+	        }
+	        $this->audioDisable ();
+	        $this->size ($size);
+	        $this->position ($start);
+	        $this->videoFrames ($videoFrames);
+	        $this->frameRate (1);
+	        return $this;
 	}
 	/**
 	* @return	object	Return self

@@ -1,9 +1,23 @@
+> **IMPORTANT!**
+
+> This class will be deprecated as of Friday April 11, 2014. 
+
+> For compatibility, we recommend using the **[Clip](https://github.com/olaferlandsen/CLIP-Command-Line-for-PHP)** project( with [FFmpeg plugin](https://github.com/olaferlandsen/CLIP-Command-Line-for-PHP/tree/master/src/Clip/plugins) ).
+
+
+
+
+
 # FFmpeg Class ( Without `ffmpeg-php` )
 A complete cross-platform class for using FFmpeg written in PHP 5.3+
 
 > **IMPORTANT!**
 
 > This class don't depend of `ffmpeg-php` php extension.
+
+
+
+
 
 ## Requirements
 

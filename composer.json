@@ -3,7 +3,7 @@
   "description": "FFmpeg-PHP-Class",
   "keywords": [
     "ffmpeg",
-    "video",
+    "video"
   ],
   "homepage": "https://github.com/olaferlandsen/FFmpeg-PHP-Class",
   "license": "MIT",

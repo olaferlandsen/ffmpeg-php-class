@@ -1,23 +1,9 @@
-> **IMPORTANT!**
-
-> This class will be deprecated as of Friday April 11, 2014. 
-
-> For compatibility, we recommend using the **[Clip](https://github.com/olaferlandsen/CLIP-Command-Line-for-PHP)** project( with [FFmpeg plugin](https://github.com/olaferlandsen/CLIP-Command-Line-for-PHP/tree/master/src/Clip/plugins) ).
-
-
-
-
-
 # FFmpeg Class ( Without `ffmpeg-php` )
 A complete cross-platform class for using FFmpeg written in PHP 5.3+
 
 > **IMPORTANT!**
 
-> This class don't depend of `ffmpeg-php` php extension.
-
-
-
-
+> This class DON'T depend of `ffmpeg-php` php extension.
 
 ## Requirements
 
@@ -275,23 +261,11 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	$FFmpeg->ready();
 	?>
 ```
-
-## Got more ideas? write us.
-
-Need support? Write us, it's free! olaftriskel@gmail.com
-
-## Want to donate or just give me a coffee?
-
-* Use my Paypal account: olaftriskel@gmail.com
-* [Donate a cofee via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLJQ6GS4ZNLEG)
-
 ## Remember:
 
 * This is an open source project and free.
 * Share our repository.
-* If possible, write a letter of recommendation.
-* The support is free! Please contact us if you have questions or a problem.
-
+* 
 ## Author
 
 * Author	:	Olaf Erlandsen
@@ -300,9 +274,5 @@ Need support? Write us, it's free! olaftriskel@gmail.com
 * Version	:	0.1.3
 * Date		:	11.18.2013( mm.dd.yyyy )
 * License	:	http://opensource.org/licenses/gpl-license.php
-* Home Page:	http://erlandsen.github.io/FFmpeg-PHP-Class/
-* 
+* Home Page     :	http://erlandsen.github.io/FFmpeg-PHP-Class/
 
-Pro
-[Buy Now](https://www.2checkout.com/checkout/purchase?sid=202460501&quantity=1&product_id=1)
-** 2Checkout.com Inc. (Ohio, USA) is a payment facilitator for goods and services provided by heliotres.cl. **

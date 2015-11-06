@@ -1,14 +1,12 @@
 {
-  "name": "bashencode/FFmpeg-PHP-Class",
+  "name": "olaferlandsen/FFmpeg-PHP-Class",
   "description": "FFmpeg-PHP-Class",
   "keywords": [
-    "router",
-    "routing",
-    "rest"
+    "ffmpeg",
+    "video",
   ],
-  "homepage": "https://github.com/bashencode/FFmpeg-PHP-Class",
+  "homepage": "https://github.com/olaferlandsen/FFmpeg-PHP-Class",
   "license": "MIT",
-  ],
   "require": {
     "php": ">=5.3.0"
   },

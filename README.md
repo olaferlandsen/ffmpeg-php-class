@@ -3,7 +3,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 
 > **IMPORTANT!**
 
-> This class DON'T depend of `ffmpeg-php` php extension.
+> This class DON'T depend/need of `ffmpeg-php` php extension.
 
 ## Requirements
 

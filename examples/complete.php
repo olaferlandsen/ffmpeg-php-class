@@ -2,7 +2,7 @@
 /**
 *	include FFmpeg class
 **/
-include DIRNAME(DIRNAME(__FILE__)).'/src/ffmpeg.class.php';
+include DIRNAME(DIRNAME(__FILE__)).'/src/FFmpeg.php';
 
 /**
 *	get options from database
@@ -25,4 +25,3 @@ foreach( $options AS $option => $values )
 }
 $FFmpeg->output( '/var/media/new.mp4' , 'mp4' );
 print($FFmpeg->command);
-?>

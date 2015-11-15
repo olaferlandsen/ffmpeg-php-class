@@ -208,7 +208,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 	?>
 ```
 
-### Example #19: Thumbs
+### Example #19: Thumbs ( Experimental )
 
 ```php
 	<?php
@@ -274,5 +274,5 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 * Version	:	0.1.3
 * Date		:	11.18.2013( mm.dd.yyyy )
 * License	:	http://opensource.org/licenses/gpl-license.php
-* Home Page     :	http://erlandsen.github.io/FFmpeg-PHP-Class/
+* Home Page :	http://erlandsen.github.io/FFmpeg-PHP-Class/
 

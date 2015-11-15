@@ -1,11 +1,13 @@
 <?php
 /**
-* FFmpeg PHP Class
+*   FFmpeg PHP Class
 * 
-* @package		FFmpeg
-* @version		0.1.3
-* @license		http://opensource.org/licenses/gpl-license.php  GNU Public License
-* @author		Olaf Erlandsen <olaftriskel@gmail.com>
+*   With this class you can use FFmpeg with PHP without installing php-ffmpeg extension.
+*
+*   @package        FFmpeg
+*   @version        0.1.4
+*   @license        http://opensource.org/licenses/gpl-license.php  GNU Public License
+*   @author         Olaf Erlandsen <olaftriskel@gmail.com>
 */
 class FFmpeg
 {
@@ -39,7 +41,7 @@ class FFmpeg
 		'number'	=>	'videoFrames',
 		'vframes'	=>	'videoFrames',
 		'y'			=>	'overwrite',
-		'log'		=>	'loglevel',
+		'log'		=>	'logLevel',
 	);
 	/**
 	*	
@@ -77,25 +79,30 @@ class FFmpeg
 	*/
 	public function __call( $method , $args )
 	{
-		if( array_key_exists( $method , $this->as ) )
-		{
-			return call_user_func_array( array( $this , $this->as[$method] ),( is_array( $args ) ) ? $args : array( $args ));
-		}
-		else if( in_array( $method , $this->quickMethods ) )
-		{
-			return call_user_func_array( array($this,'set'),( is_array( $args ) ) ? $args : array( $args ));
-		}else{
-			throw new Exception( 'method '. $method .' doesnt exist' );
+		if (array_key_exists($method, $this->as)) {
+			return call_user_func_array(
+			    array($this, $this->as[$method]),
+			    ( is_array( $args ) ) ? $args : array( $args )
+			);
+		} elseif (in_array($method, $this->quickMethods)) {
+			return call_user_func_array(
+			    array($this, 'set'),
+			    ( is_array( $args ) ) ? $args : array( $args )
+			);
+		} else {
+			throw new Exception( 'The method "'. $method .'" doesnt exist' );
 		}
 	}
+	/**
+	*	
+	*/
 	public function call( $method , $args = array() )
 	{
-		if( method_exists( $this , $method ) )
-		{
+		if (method_exists ($this, $method)) {
 			return call_user_func_array( array( $this , $method )  , 
 				( is_array( $args ) ) ? $args : array( $args )
 			);
-		}else{
+		} else {
 			throw new Exception( 'method doesnt exist' );
 		}
 		return $this;
@@ -106,63 +113,54 @@ class FFmpeg
 	public function __construct( $ffmpeg = null ,$input = false )
 	{
 		$this->ffmpeg( $ffmpeg );
-		if( !empty( $input ) )
-		{
+		if (!empty($input)) {
 			$this->input( $input );
 		}
 		return $this;
 	}
 	/**
-	* @param	string	$std
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$std
+	*   @return	object
+	*   @access	public
 	*/
 	public function redirectOutput( $std )
 	{
-		if( !empty($std) )
-		{
+		if (!empty($std)) {
 			$this->STD = ' '.$std;
 		}
 		return $this;
 	}
 	/**
-	* @param	string	$output			Output file path
-	* @param	string	$forceFormat	Force format output
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$output			Output file path
+	*   @param	string	$forceFormat	Force format output
+	*   @return	object
+	*   @access	public
 	*/
 	public function output( $output = null , $forceFormat = null )
 	{
 		$this->forceFormat( $forceFormat );
 		$options = array();
-		foreach( $this->options AS $option => $values )
-		{
-			if( is_array( $values ) )
-			{
+		foreach ($this->options AS $option => $values) {
+			if (is_array($values)) {
 				$items = array();
-				foreach( $values AS $item => $val )
-				{
-					if( !is_null( $val ) )
-					{
-						if( is_array( $val ) )
-						{
+				foreach ($values AS $item => $val) {
+					if (!is_null($val)) {
+						if (is_array($val)) {
 							print_r( $val );
 							$val = join( ',' , $val );
 						}
 						$val = strval( $val );
-						
-						if( is_numeric( $item ) AND is_integer( $item ) )
-						{
+						if (is_numeric( $item ) AND is_integer($item)) {
 							$items[] = $val;
-						}else{
+						} else {
 							$items[] = $item."=". $val;
 						}
-					}else{
+					} else {
 						$items[] = $item;
 					}
 				}
 				$options [] = "-".$option." ".join(',',$items);
-			}else{
+			} else {
 				$options [] = "-".$option." ".strval($values);
 			}
 		}
@@ -170,17 +168,15 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @param	string	$forceFormat	Force format output
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$forceFormat	Force format output
+	*   @return	object
+	*   @access	public
 	*/
 	public function forceFormat( $forceFormat )
 	{
-		if( !empty( $forceFormat ) )
-		{
+		if (!empty($forceFormat)) {
 			$forceFormat = strtolower( $forceFormat );
-			if( array_key_exists( $forceFormat , $this->fixForceFormat ) )
-			{
+			if (array_key_exists( $forceFormat, $this->fixForceFormat)) {
 				$forceFormat = $this->fixForceFormat[ $forceFormat ];
 			}
 			$this->set('f',$forceFormat,false);
@@ -188,10 +184,10 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @param	string	$file	input file path
-	* @return	object	Return self
-	* @access	public
-	* @version	1.2	Fix by @propertunist
+	*   @param	string	$file	input file path
+	*   @return	object
+	*   @access	public
+	*   @version	1.2	Fix by @propertunist
 	*/
 	public function input ($file)
 	{
@@ -207,12 +203,14 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @param	string	$size
-	* @param	string	$start
-	* @param	string	$videoFrames
-	* @return	object	Return self
-	* @access	public
-	* @version	1.2	Fix by @propertunist
+	*   ATENTION!: This method is experimental
+	*
+	*   @param	string	$size
+	*   @param	string	$start
+	*   @param	string	$videoFrames
+	*   @return	object
+	*   @access	public
+	*   @version	1.2	Fix by @propertunist 
 	*/
 	public function thumb ($size, $start, $videoFrames = 1)
 	{
@@ -228,8 +226,8 @@ class FFmpeg
 	        return $this;
 	}
 	/**
-	* @return	object	Return self
-	* @access	public
+	*   @return	object
+	*   @access	public
 	*/
 	public function clear()
 	{
@@ -237,9 +235,9 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @param	string	$transpose	http://ffmpeg.org/ffmpeg.html#transpose
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$transpose	http://ffmpeg.org/ffmpeg.html#transpose
+	*   @return	object
+	*   @access	public
 	*/
 	public function transpose( $transpose = 0 )
 	{
@@ -250,27 +248,28 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @return	object	Return self
-	* @access	public
+	*   @return	object
+	*   @access	public
 	*/
-	public function vflip()
+	public function vFlip()
 	{
 		$this->options['vf']['vflip'] = null;
 		return $this;
 	}
 	/**
-	* @return	object	Return self
-	* @access	public
+	*   @return	object
+	*   @access	public
 	*/
-	public function hflip()
+	public function hFlip()
 	{
 		$this->options['vf']['hflip'] = null;
 		return $this;
 	}
 	/**
-	* @return	object	Return self
-	* @param	$flip	v OR h
-	* @access	public
+	*   @return     object
+	*   @param      $flip	v=vertial OR h=horizontal
+	*   @access     public
+	*   @example    $ffmpeg->flip('v'); 
 	*/
 	public function flip( $flip )
 	{
@@ -279,37 +278,39 @@ class FFmpeg
 			$flip = strtolower( $flip );
 			if( $flip == 'v' )
 			{
-				return $this->vflip();
+				return $this->vFlip();
 			}
 			else if( $flip == 'h' )
 			{
-				$this->hflip();
+				$this->hFlip();
 			}
 		}
 		return false;
 	}
 	/**
-	* @param	string	$aspect	sample aspect ratio
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$aspect	sample aspect ratio
+	*   @return	object
+	*   @access	public
 	*/
 	public function aspect( $aspect )
 	{
 		$this->set('aspect',$aspect,false);
 	}
 	/**
-	* @param	string	$b	set bitrate (in bits/s)
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$b	set bitrate (in bits/s)
+	*   @return	object
+	*   @access	public
+	*   @example    $ffmpeg->bitrate('3000/1000');
+	
 	*/
 	public function bitrate( $b )
 	{
 		return $this->set('b',$b,false);
 	}
 	/**
-	* @param	string	$r	Set frame rate (Hz value, fraction or abbreviation).
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$r	Set frame rate (Hz value, fraction or abbreviation).
+	*   @return	object
+	*   @access	public
 	*/
 	public function frameRate( $r )
 	{
@@ -320,14 +321,13 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @param	string	$s	Set frame size.
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$s	Set frame size.
+	*   @return	object
+	*   @access	public
 	*/
 	public function size( $s )
 	{
-		if( !empty( $s ) AND preg_match( '/^([0-9]+x[0-9]+)$/' , $s ) )
-		{
+		if (!empty($s) AND preg_match( '/^([0-9]+x[0-9]+)$/', $s)) {
 			$this->set('s',$s,false);
 		}
 		return $this;
@@ -335,18 +335,18 @@ class FFmpeg
 	/**
 	* When used as an input option (before "input"), seeks in this input file to position. When used as an output option (before an output filename), decodes but discards input until the timestamps reach position. This is slower, but more accurate.
 	*
-	* @param	string	$s	position may be either in seconds or in hh:mm:ss[.xxx] form.
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$s	position may be either in seconds or in hh:mm:ss[.xxx] form.
+	*   @return	object
+	*   @access	public
 	*/
 	public function position( $ss )
 	{
 		return $this->set('ss',$ss,false);
 	}
 	/**
-	* @param	string	$t	Stop writing the output after its duration reaches duration. duration may be a number in seconds, or in hh:mm:ss[.xxx] form.
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$t	Stop writing the output after its duration reaches duration. duration may be a number in seconds, or in hh:mm:ss[.xxx] form.
+	*   @return	object
+	*   @access	public
 	*/
 	public function duration( $t )
 	{
@@ -355,9 +355,9 @@ class FFmpeg
 	/**
 	* Set the input time offset in seconds. [-]hh:mm:ss[.xxx] syntax is also supported. The offset is added to the timestamps of the input files.
 	*
-	* @param	string	$t	Specifying a positive offset means that the corresponding streams are delayed by offset seconds.
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$t	Specifying a positive offset means that the corresponding streams are delayed by offset seconds.
+	*   @return	object
+	*   @access	public
 	*/
 	public function itsoffset( $itsoffset )
 	{
@@ -406,9 +406,9 @@ class FFmpeg
 		return $this->set('an',null,false);
 	}
 	/**
-	* @param	string	$number
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$number
+	*   @return	object
+	*   @access	public
 	*/
 	public function videoFrames( $number )
 	{
@@ -469,9 +469,9 @@ class FFmpeg
 		return $this;
 	}
 	/**
-	* @return	object	Return self
-	* @param	string	$append
-	* @access	public
+	*   @return	object
+	*   @param	string	$append
+	*   @access	public
 	*/
 	public function ready( $append = null )
 	{
@@ -491,14 +491,13 @@ class FFmpeg
 		}
 	}
 	/**
-	* @return	object	Return self
-	* @param	string	ffmpeg
-	* @access	public
+	*   @return	object
+	*   @param	string	ffmpeg
+	*   @access	public
 	*/
 	public function ffmpeg( $ffmpeg )
 	{
-		if( !empty( $ffmpeg ) )
-		{
+		if (!empty( $ffmpeg)) {
 			$this->ffmpeg = $ffmpeg;
 		}
 	}
@@ -556,11 +555,11 @@ class FFmpeg
 	}
 	
 	/**
-	* @param	string	$level
-	* @return	object	Return self
-	* @access	public
+	*   @param	string	$level
+	*   @return	object
+	*   @access	public
 	*/
-	public function loglevel( $level = "verbose" )
+	public function logLevel( $level = "verbose" )
 	{
 		$level = strtolower( $level );
 		if( in_array( $level , array("quiet","panic","fatal","error","warning","info","verbose","debug") ) )
@@ -571,4 +570,3 @@ class FFmpeg
 		}
 	}
 }
-?>

@@ -11,6 +11,14 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 * PHP 5.3+
     * PCRE( Perl-Compatible )
 
+
+## Install
+
+You can download FFmpeg class via Github (https://github.com/olaferlandsen/ffmpeg-php-class/archive/master.zip)[here]
+
+Or If you want intall via Composer, try with `composer require olaferlandsen/ffmpeg-php-class`
+
+
 ## Examples
 
 ### Example #1: Input & output.

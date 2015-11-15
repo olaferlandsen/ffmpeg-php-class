@@ -14,7 +14,7 @@ A complete cross-platform class for using FFmpeg written in PHP 5.3+
 
 ## Install
 
-You can download FFmpeg class via Github (https://github.com/olaferlandsen/ffmpeg-php-class/archive/master.zip)[here]
+You can download FFmpeg class via Github [here](https://github.com/olaferlandsen/ffmpeg-php-class/archive/master.zip)
 
 Or If you want intall via Composer, try with `composer require olaferlandsen/ffmpeg-php-class`
 

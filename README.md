@@ -1,3 +1,6 @@
+[![Donate](https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8TJZSNT5JQUXL)
+
+
 # FFmpeg Class ( Without `ffmpeg-php` )
 A complete cross-platform class for using FFmpeg written in PHP 5.3+
 
@@ -273,14 +276,4 @@ Or If you want install via Composer, try with `composer require olaferlandsen/ff
 
 * This is an open source project and free.
 * Share our repository.
-* 
-## Author
-
-* Author	:	Olaf Erlandsen
-* Contact	:	olaftriskel@gmail.com <Olaf Erlandsen>
-* Skype		:	olaferlandsen
-* Version	:	0.1.3
-* Date		:	11.18.2013( mm.dd.yyyy )
-* License	:	http://opensource.org/licenses/gpl-license.php
-* Home Page :	http://erlandsen.github.io/FFmpeg-PHP-Class/
 

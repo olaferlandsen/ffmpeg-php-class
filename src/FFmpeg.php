@@ -99,13 +99,12 @@ class FFmpeg
 	public function call( $method , $args = array() )
 	{
 		if (method_exists ($this, $method)) {
-			return call_user_func_array( array( $this , $method )  , 
+			return call_user_func_array(
+				array( $this , $method )  , 
 				( is_array( $args ) ) ? $args : array( $args )
 			);
-		} else {
-			throw new Exception( 'method doesnt exist' );
 		}
-		return $this;
+		throw new Exception( 'method doesnt exist' );
 	}
 	/**
 	*	

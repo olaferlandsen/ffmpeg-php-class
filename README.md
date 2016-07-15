@@ -277,3 +277,6 @@ Or If you want install via Composer, try with `composer require olaferlandsen/ff
 * This is an open source project and free.
 * Share our repository.
 
+## Thanks to:
+* [@HankBrown](https://github.com/HankBrown)
+* [@remotemethod](https://github.com/remotemethod)

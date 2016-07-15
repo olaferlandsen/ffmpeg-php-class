@@ -396,7 +396,7 @@ class FFmpeg
 	*/
 	public function audioQuality( $aq )
 	{
-		return $this->set('aq', $a , false );
+		return $this->set('aq', $aq , false );
 	}
 	/**
 	*	

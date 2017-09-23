@@ -5,7 +5,7 @@
 *   With this class you can use FFmpeg with PHP without installing php-ffmpeg extension.
 *
 *   @package        FFmpeg
-*   @version        0.1.4
+*   @version        0.1.5
 *   @license        http://opensource.org/licenses/gpl-license.php  GNU Public License
 *   @author         Olaf Erlandsen <olaftriskel@gmail.com>
 */
@@ -61,9 +61,7 @@ class FFmpeg
 	/**
 	*	
 	*/
-	private $options	=	array(
-		'y'	=>	null,
-	);
+	private $options	=	array();
 	/**
 	*	
 	*/
